@@ -38,6 +38,9 @@ chat.db
 chat.db-shm
 chat.db-wal
 
+### до переноса в отдельные проедки весь код лежал тут 👇 ###
+/src/
+
 ### VS Code ###
 .vscode/
 
