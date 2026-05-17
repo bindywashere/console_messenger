@@ -4,6 +4,12 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+### server ###
+/messenger_server/target/
+
+### client ###
+/messenger_client/target/
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
