@@ -1,9 +1,14 @@
 package ru.bindywashere.db;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
 
 public class DatabaseManager {
-    private static final String DB_URL = "jdbc:sqlite:chat.db";
+    static Dotenv dotenv = Dotenv.load();
+
+    String dbUrl = dotenv.get("DB_URL");
+    String dbUsername = dotenv.get("DB_USERNAME");
+    String dbPassword = dotenv.get("DB_PASSWORD");
     private static DatabaseManager instance;
     private Connection connection;
     private DatabaseManager() throws SQLException {
@@ -19,23 +24,18 @@ public class DatabaseManager {
     }
 
     public void connect() throws SQLException {
-        connection = DriverManager.getConnection(DB_URL);
+        connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         System.out.println("[DB] >> successfully connected w/ DB");
-
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute("PRAGMA journal_mode=WAL");
-            stmt.execute("PRAGMA foreign_keys=ON");
-        }
     }
 
     public void initDatabase() throws SQLException {
         try (Statement stmt = connection.createStatement()) {
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS messages (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id SERIAL PRIMARY KEY,
                     nickname TEXT NOT NULL,
                     content TEXT NOT NULL,
-                    timestamp INTEGER NOT NULL
+                    timestamp BIGINT NOT NULL
                 )
                 """);
 
