@@ -39,6 +39,10 @@ public class ClientHandler implements Runnable{
         while (socket.isConnected()) {
             try {
                 messageFromClient = bufferedReader.readLine();
+                if (messageFromClient == null) {
+                    closeEverything(socket, bufferedReader, bufferedWriter);
+                    break;
+                }
                 Message msg = new Message(clientUsername, messageFromClient);
                 messageDAO.saveMessage(msg);
                 broadcastMessage(msg.toString());
