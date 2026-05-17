@@ -29,7 +29,8 @@ public class Server {
                 thread.start();
             }
         } catch (IOException e) {
-
+            System.err.println("an error occurred! ");
+            e.printStackTrace();
         }
     }
 
