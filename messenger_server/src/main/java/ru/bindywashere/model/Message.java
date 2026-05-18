@@ -9,17 +9,17 @@ public class Message {
     private long id;
     private String nickname;
     private String content;
-    private long timestamp;
+    private Instant timestamp;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault());
 
     public Message(String nickname, String content) {
         this.nickname = nickname;
         this.content = content;
-        this.timestamp = System.currentTimeMillis();
+        this.timestamp = Instant.now();
     }
 
-    public Message(long id, String nickname, String content, long timestamp) {
+    public Message(long id, String nickname, String content, Instant timestamp) {
         this.id = id;
         this.nickname = nickname;
         this.content = content;
@@ -38,7 +38,7 @@ public class Message {
         return content;
     }
 
-    public long getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
@@ -47,7 +47,8 @@ public class Message {
     }
 
     public String getFormattedTime() {
-        LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+        LocalDateTime dateTime = LocalDateTime.ofInstant((timestamp), ZoneId.systemDefault());
+
         return dateTime.format(FORMATTER);
     }
 

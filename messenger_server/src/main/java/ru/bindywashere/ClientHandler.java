@@ -47,6 +47,9 @@ public class ClientHandler implements Runnable{
                 messageDAO.saveMessage(msg);
                 broadcastMessage(msg.toString());
             } catch (IOException | SQLException e) {
+                System.out.println("[SERVER] >> an error occurred on a side of \"" + clientUsername + "\" side: " + e.getMessage());
+                e.printStackTrace();
+
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
             }
@@ -61,7 +64,7 @@ public class ClientHandler implements Runnable{
                 return;
             }
 
-            bufferedWriter.write("SERVER >> --- start of chat history ---");
+            bufferedWriter.write("[SERVER] >> --- start of chat history ---");
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
@@ -71,12 +74,13 @@ public class ClientHandler implements Runnable{
                 bufferedWriter.flush();
             }
 
-            bufferedWriter.write("SERVER >> --- end of chat history ---");
+            bufferedWriter.write("[SERVER] >> --- end of chat history ---");
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
         } catch (SQLException | IOException e) {
-            System.err.println("couldn't get chat history >> " + e.getMessage());
+            System.err.println("[ERROR] couldn't get chat history >> " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -89,6 +93,8 @@ public class ClientHandler implements Runnable{
                     clientHandler.bufferedWriter.flush();
                 }
             } catch (Exception e) {
+                System.err.println("[ERROR] >> couldn't send a message to client: " + e.getMessage());
+                e.printStackTrace();
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }
         }

@@ -35,7 +35,7 @@ public class DatabaseManager {
                     id SERIAL PRIMARY KEY,
                     nickname TEXT NOT NULL,
                     content TEXT NOT NULL,
-                    timestamp BIGINT NOT NULL
+                    timestamp TIMESTAMP NOT NULL DEFAULT NOW()
                 )
                 """);
 
