@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class Server {
     private MessageDAO messageDAO;
     private ServerSocket serverSocket;
-    static Dotenv dotenv;
+    static Dotenv dotenv = Dotenv.load();
 
     public Server(ServerSocket serverSocket, MessageDAO messageDAO) {
         this.serverSocket = serverSocket;
@@ -45,9 +45,6 @@ public class Server {
     }
 
     public static void main(String[] args) throws IOException, SQLException {
-        EnvInit.init();
-        dotenv = Dotenv.load();
-
         int port = Integer.parseInt(dotenv.get("APP_PORT"));
 
         DatabaseManager dbManager = DatabaseManager.getInstance();

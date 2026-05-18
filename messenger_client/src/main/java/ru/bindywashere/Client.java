@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    static Dotenv dotenv;
+    static Dotenv dotenv = Dotenv.load();
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -84,8 +84,6 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-        EnvInit.init();
-        dotenv = Dotenv.load();
         int port = Integer.parseInt(dotenv.get("APP_PORT"));
 
         Scanner scanner = new Scanner(System.in);
