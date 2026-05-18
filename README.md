@@ -15,6 +15,7 @@ docker run -d \
   postgres:16
 ```
 You should save somewhere name of your DB (`POSTGRES_DB`), username (`POSTGRES_USER`) and password (`POSTGRES_PASSWORD`) with port (`5432:5432` - default PostgreSQL port), since you'll need this later
+
 2. Create `.env` file and fill it in according to the `.env.clientexample` and your data from previous command
 3. Start server by following command in terminal:
 ``` 
