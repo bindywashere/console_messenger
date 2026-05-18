@@ -14,20 +14,16 @@ docker run -d \
   -p 5432:5432 \
   postgres:16
 ```
-You should write somewhere name of your DB (`POSTGRES_DB`), username (`POSTGRES_USER`) and password (`POSTGRES_PASSWORD`) with port (`5432:5432` - default PostgreSQL port), since you'll need this later
-
-2. Start server by following command in terminal:
+You should save somewhere name of your DB (`POSTGRES_DB`), username (`POSTGRES_USER`) and password (`POSTGRES_PASSWORD`) with port (`5432:5432` - default PostgreSQL port), since you'll need this later
+2. Create `.env` file and fill it in according to the `.env.clientexample` and your data from previous command
+3. Start server by following command in terminal:
 ``` 
 java -jar server-jar-with-dependencies.jar
 ```
-If you don't have `.env` file it'll be created in the folder with jar-file.
-3. Change `.env` file according the parameters, you entered in the command in the 1st point. Don't forget about the `APP_PORT` field there you should choose on wich port will gonna work server *(NOT DATABASE PORT)*
-4. Start the server again
 ## Client:
-1. Enter following command in a terminal with a directory where your jar-file is stored
+1. Create `.env` file and fill it in according to the `.env.clientexample`
+2. Enter following command in a terminal with a directory where your jar-file is stored
 ```
 java -jar client-jar-with-dependencies.jar
 ```
-It will create an `.env` file in the directory with your jar
-2. Edit `.env` file according the `APP_PORT` field from the server's `.env`
-3. Start the client again
+
