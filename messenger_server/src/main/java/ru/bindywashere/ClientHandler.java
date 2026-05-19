@@ -47,7 +47,7 @@ public class ClientHandler implements Runnable{
                 messageDAO.saveMessage(msg);
                 broadcastMessage(msg.toString());
             } catch (IOException | SQLException e) {
-                System.out.println("[SERVER] >> an error occurred on a side of \"" + clientUsername + "\" side: " + e.getMessage());
+                System.out.println("[SERVER] >> an error occurred: " + e.getMessage());
                 e.printStackTrace();
 
                 closeEverything(socket, bufferedReader, bufferedWriter);

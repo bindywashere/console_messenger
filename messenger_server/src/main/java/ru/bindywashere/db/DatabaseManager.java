@@ -6,7 +6,7 @@ import java.sql.*;
 public class DatabaseManager {
     static Dotenv dotenv = Dotenv.load();
 
-    String dbUrl = dotenv.get("DB_URL");
+    String dbUrl = "jdbc:postgresql://"+dotenv.get("DB_HOST")+":" + dotenv.get("DB_PORT") + "/" + dotenv.get("DB_NAME");
     String dbUsername = dotenv.get("DB_USERNAME");
     String dbPassword = dotenv.get("DB_PASSWORD");
     private static DatabaseManager instance;
