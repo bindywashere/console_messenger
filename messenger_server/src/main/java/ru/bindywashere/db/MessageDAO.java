@@ -23,7 +23,7 @@ public class MessageDAO {
 
             pstmt.setString(1, message.getNickname());
             pstmt.setString(2, message.getContent());
-            pstmt.setLong(3, message.getTimestamp());
+            pstmt.setTimestamp(3, Timestamp.from(message.getTimestamp()));
 
             pstmt.executeUpdate();
 
@@ -50,6 +50,6 @@ public class MessageDAO {
     }
 
     public Message mapRow(ResultSet rs) throws SQLException {
-        return new Message(rs.getLong("id"), rs.getString("nickname"), rs.getString("content"), rs.getLong("timestamp"));
+        return new Message(rs.getLong("id"), rs.getString("nickname"), rs.getString("content"), rs.getTimestamp("timestamp").toInstant());
     }
 }

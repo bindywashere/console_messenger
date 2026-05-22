@@ -52,3 +52,5 @@ chat.db-wal
 
 ### Mac OS ###
 .DS_Store
+/messenger_server/.env
+/messenger_client/.env

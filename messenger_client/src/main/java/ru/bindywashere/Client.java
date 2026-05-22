@@ -1,10 +1,13 @@
 package ru.bindywashere;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
+    static Dotenv dotenv = Dotenv.load();
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -20,7 +23,6 @@ public class Client {
         } catch (IOException e) {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
-
     }
 
     public void sendMessage(){
@@ -82,10 +84,12 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
+        int port = Integer.parseInt(dotenv.get("APP_PORT"));
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("what's your name? -+=+-> ");
         String username = scanner.nextLine();
-        Socket socket = new Socket("localhost", 1234);
+        Socket socket = new Socket("localhost", port);
         Client client = new Client(socket, username);
         client.listenForMessage();
         client.sendMessage();
